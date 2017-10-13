@@ -1,6 +1,7 @@
 package com.ye.es.my.util;
 
 import com.ye.es.my.factory.EsClientFactory;
+import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -33,11 +34,18 @@ public class EsUtils {
      * @param jsondata
      * @return
      */
-    public IndexResponse createIndexResponse(String indexname, String type,String jsondata){
+    public IndexResponse createIndexResponse(String indexname, String type,String id, String jsondata){
         TransportClient client= EsClientFactory.getTransportClient();
-        IndexResponse response = client.prepareIndex(indexname, type)
-                .setSource(jsondata, XContentType.JSON)
-                .get();
+        IndexResponse response = null;
+        if(StringUtils.isBlank(id)){
+            response = client.prepareIndex(indexname, type)
+                    .setSource(jsondata, XContentType.JSON)
+                    .get();
+        }else{
+            response = client.prepareIndex(indexname, type,id)
+                    .setSource(jsondata, XContentType.JSON)
+                    .get();
+        }
         return response;
     }
     //更新-1

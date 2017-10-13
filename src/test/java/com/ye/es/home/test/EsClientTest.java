@@ -19,6 +19,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
@@ -55,9 +57,10 @@ public class EsClientTest {
 //=================================
     @Test
     public void clientFactoryQueryTest(){
-        String indexname = "messages-2017.09.29";
-        String type ="logs" ;
-        String id = "AV8VJMdMswldUW4R773K";
+        String indexname = "twitter";
+        String type ="tweet" ;
+        String id = "AV8Vh-aITPcQXziRlbCm";
+//        String id = "AV7Mp5ZoonBXshdrNfRG";
         EsUtils esUtil = new EsUtils();
         GetResponse response = esUtil.getIndexResponse(indexname, type, id);
         log.info("111:" + response);
@@ -66,23 +69,23 @@ public class EsClientTest {
 
     @Test
     public void clientFactoryCreateTest(){
-        String indexname = "messages-2017.09.29";
-        String type ="logs" ;
-//        String id = "AV7Mp61Tl8e-24lpjaDR";
+        String indexname = "twitter";
+        String type ="tweet" ;
+        String id = "";
         String json = "{" +
-                "\"user\":\"kimchy12345\"," +
-                "\"postDate\":\"2013-01-30\"," +
+                "\"user\":\"kimchy12345_02\"," +
+                "\"postDate\":\""+getFormatDate(new Date())+"\"," +
                 "\"message\":\"trying out Elasticsearch 12345\"" +
                 "}";
         EsUtils esUtil = new EsUtils();
-        IndexResponse response = esUtil.createIndexResponse(indexname,type ,json );
+        IndexResponse response = esUtil.createIndexResponse(indexname,type ,id,json );
         System.out.println(response);
     }
     @Test
     public void clientFactoryUpdateTest() throws ExecutionException, InterruptedException {
-        String indexname = "messages-2017.09.29";
-        String type ="logs" ;
-        String id = "AV8VJMdMswldUW4R773K";
+        String indexname = "twitter";
+        String type ="tweet" ;
+        String id = "AV8Vh-aITPcQXziRlbCm";
         String json = "trying out Elasticsearch 12345 update by script";
         EsUtils esUtil = new EsUtils();
         UpdateResponse response = esUtil.updateIndexResponseByScript(indexname, type, id, json);
@@ -90,9 +93,9 @@ public class EsClientTest {
     }
     @Test
     public void clientFactoryUpdateTest2() throws ExecutionException, InterruptedException, IOException {
-        String indexname = "messages-2017.09.29";
-        String type ="logs" ;
-        String id = "AV8VCSSCswldUW4R7728";
+        String indexname = "twitter";
+        String type ="tweet" ;
+        String id = "AV8Vh-aITPcQXziRlbCm";
         String json = "trying out Elasticsearch 12345 update by merging";
         EsUtils esUtil = new EsUtils();
         UpdateResponse response = esUtil.updateIndexResponseByMerging(indexname, type, id, json);
@@ -106,5 +109,12 @@ public class EsClientTest {
         EsUtils esUtil = new EsUtils();
         DeleteResponse response = esUtil.deleteIndexResponse(indexname, type, id);
         System.out.println(response);
+    }
+
+
+    public String getFormatDate(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateJson = format.format(date);
+        return dateJson;
     }
 }
