@@ -22,6 +22,8 @@ import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -55,6 +57,7 @@ public class EsClientTest {
 
     }
 //=================================
+    //查询
     @Test
     public void clientFactoryQueryTest(){
         String indexname = "twitter";
@@ -66,7 +69,7 @@ public class EsClientTest {
         log.info("111:" + response);
         System.out.println(response);
     }
-
+    //创建索引-json方式
     @Test
     public void clientFactoryCreateTest(){
         String indexname = "twitter";
@@ -81,6 +84,20 @@ public class EsClientTest {
         IndexResponse response = esUtil.createIndexResponse(indexname,type ,id,json );
         System.out.println(response);
     }
+    //创建索引-builder方式
+    @Test
+    public void clientFactoryCreateTest2() throws IOException {
+        String indexname = "indexmedicine";
+        String type ="typemedicine" ;
+        String id = "";
+       Map<String,Object> mapData = new HashMap<String, Object>();
+        mapData.put("id",5);
+        mapData.put("name","仁和 感冒 颗粒");
+        mapData.put("funciton","功能主治：疏风清热，宣肺止咳,解表清热，止咳化痰。");
+        EsUtils esUtil = new EsUtils();
+        IndexResponse response = esUtil.createIndexResponseByBuilder(indexname, type, id, mapData);
+        System.out.println(response);
+    }
     @Test
     public void clientFactoryUpdateTest() throws ExecutionException, InterruptedException {
         String indexname = "twitter";
@@ -93,12 +110,15 @@ public class EsClientTest {
     }
     @Test
     public void clientFactoryUpdateTest2() throws ExecutionException, InterruptedException, IOException {
-        String indexname = "twitter";
-        String type ="tweet" ;
+        String indexname = "indexmedicine";
+        String type ="typemedicine" ;
         String id = "AV8Vh-aITPcQXziRlbCm";
-        String json = "trying out Elasticsearch 12345 update by merging";
+        Map<String,Object> mapData = new HashMap<String, Object>();
+        mapData.put("id",1);
+        mapData.put("name","银花 感冒 颗粒");
+        mapData.put("funciton","功能主治：银花感冒颗粒 ，头痛,清热，解表，利咽。");
         EsUtils esUtil = new EsUtils();
-        UpdateResponse response = esUtil.updateIndexResponseByMerging(indexname, type, id, json);
+        UpdateResponse response = esUtil.updateIndexResponseByMerging(indexname, type, id, mapData);
         System.out.println(response);
     }
     @Test
