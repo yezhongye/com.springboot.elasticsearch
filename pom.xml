@@ -18,6 +18,7 @@
     </parent>
     <properties>
         <commons-lang.version>2.6</commons-lang.version>
+        <elasticsearch.version>5.6.3</elasticsearch.version>
     </properties>
     <dependencies>
         <dependency>
@@ -37,7 +38,7 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>5.6.3</version>
+            <version>${elasticsearch.version}</version>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>

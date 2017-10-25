@@ -87,13 +87,13 @@ public class EsClientTest {
     //创建索引-builder方式
     @Test
     public void clientFactoryCreateTest2() throws IOException {
-        String indexname = "indexmedicine";
-        String type ="typemedicine" ;
+        String indexname = "indexanimation";
+        String type ="typeanimation" ;
         String id = "";
        Map<String,Object> mapData = new HashMap<String, Object>();
         mapData.put("id",5);
-        mapData.put("name","仁和 感冒 颗粒");
-        mapData.put("funciton","功能主治：疏风清热，宣肺止咳,解表清热，止咳化痰。");
+        mapData.put("name","jiqimao01");
+        mapData.put("funciton","英文版一共50集");
         EsUtils esUtil = new EsUtils();
         IndexResponse response = esUtil.createIndexResponseByBuilder(indexname, type, id, mapData);
         System.out.println(response);
@@ -110,13 +110,13 @@ public class EsClientTest {
     }
     @Test
     public void clientFactoryUpdateTest2() throws ExecutionException, InterruptedException, IOException {
-        String indexname = "indexmedicine";
-        String type ="typemedicine" ;
-        String id = "AV8Vh-aITPcQXziRlbCm";
+        String indexname = "indexanimation";
+        String type ="typeanimation" ;
+        String id = "AV8p5F-xswldUW4R8n1o";
         Map<String,Object> mapData = new HashMap<String, Object>();
-        mapData.put("id",1);
-        mapData.put("name","银花 感冒 颗粒");
-        mapData.put("funciton","功能主治：银花感冒颗粒 ，头痛,清热，解表，利咽。");
+        mapData.put("id",3);
+        mapData.put("name","jingangxia01");
+        mapData.put("funciton","英文版一共6集");
         EsUtils esUtil = new EsUtils();
         UpdateResponse response = esUtil.updateIndexResponseByMerging(indexname, type, id, mapData);
         System.out.println(response);
