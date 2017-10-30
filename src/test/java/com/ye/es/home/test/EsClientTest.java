@@ -87,13 +87,13 @@ public class EsClientTest {
     //创建索引-builder方式
     @Test
     public void clientFactoryCreateTest2() throws IOException {
-        String indexname = "indexanimation";
-        String type ="typeanimation" ;
+        String indexname = "indexmedicines";
+        String type ="typemedicines" ;
         String id = "";
        Map<String,Object> mapData = new HashMap<String, Object>();
-        mapData.put("id",5);
-        mapData.put("name","jiqimao01");
-        mapData.put("funciton","英文版一共50集");
+        mapData.put("id",1);
+        mapData.put("name","一贴灵");
+        mapData.put("funciton","治疗：跌打损伤，活血化瘀");
         EsUtils esUtil = new EsUtils();
         IndexResponse response = esUtil.createIndexResponseByBuilder(indexname, type, id, mapData);
         System.out.println(response);
@@ -123,9 +123,9 @@ public class EsClientTest {
     }
     @Test
     public void clientFactoryDeleteTest(){
-        String indexname = "messages-2017.09.29";
-        String type ="logs" ;
-        String id = "AV8VCSSCswldUW4R7728";
+        String indexname = "name";
+        String type ="" ;
+        String id = "";
         EsUtils esUtil = new EsUtils();
         DeleteResponse response = esUtil.deleteIndexResponse(indexname, type, id);
         System.out.println(response);
