@@ -2,9 +2,6 @@ package com.ye.es.home.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.ye.es.my.util.http.HttpUtil;
-import org.apache.calcite.jdbc.CalciteConnection;
-import org.apache.calcite.schema.SchemaPlus;
-import org.apache.calcite.sql.parser.SqlParseException;
 import org.junit.Test;
 
 import java.io.IOException;
